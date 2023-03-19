@@ -1,72 +1,16 @@
-﻿
-public readonly struct Fraction
+﻿using System;
+
+
+int numberoflayer = 4;
+int empty;
+int number;
+for (int i = 1; i <= numberoflayer; i++)
 {
-    private readonly int num;
-    private readonly int den;
-
-    public Fraction(int numerator, int denominator)
-    {
-        if (denominator == 0)
-        {
-            throw new ArgumentException("Denominator cannot be zero.", nameof(denominator));
-        }
-        num = numerator;
-        den = denominator;
-    }
-
-    public static Fraction operator +(Fraction a) => a;
-    public static Fraction operator -(Fraction a) => new Fraction(-a.num, a.den);
-
-    public static Fraction operator +(Fraction a, Fraction b)
-        => new Fraction(a.num * b.den + b.num * a.den, a.den * b.den);
-
-    public static Fraction operator -(Fraction a, Fraction b)
-        => a + (-b);
-
-    public static Fraction operator *(Fraction a, Fraction b)
-        => new Fraction(a.num * b.num, a.den * b.den);
-
-    public static Fraction operator /(Fraction a, Fraction b)
-    {
-        if (b.num == 0)
-        {
-            throw new DivideByZeroException();
-        }
-        return new Fraction(a.num * b.den, a.den * b.num);
-    }
-
-    public override string ToString() => $"{num} / {den}";
+    for (empty = 1; empty <= (numberoflayer - i); empty++)
+        Console.Write(" ");
+    for (number = 1; number <= i; number++)
+        Console.Write('*');
+    for (number = (i - 1); number >= 1; number--)
+        Console.Write('*');
+    Console.WriteLine();
 }
-
-public static class OperatorOverloading
-{
-    public static void Main()
-    {
-        var a = new Fraction(5, 4);
-        var b = new Fraction(1, 2);
-        Console.WriteLine(-a);   // output: -5 / 4
-        Console.WriteLine(a + b);  // output: 14 / 8
-        Console.WriteLine(a - b);  // output: 6 / 8
-        Console.WriteLine(a * b);  // output: 5 / 8
-        Console.WriteLine(a / b);  // output: 10 / 4
-    }
-}
-
-
-/*задание 2
- int Factorial(int n)
-{
-    if (n == 1) return 1;
-
-    return n * Factorial(n - 1);
-}
-
-int factorial5 = Factorial(5);
-int factorial1 = Factorial(1);
-int factorial9 = Factorial(9);
-
-
-Console.WriteLine($"Факториал числа 5 = {factorial5}");
-Console.WriteLine($"Факториал числа 1 = {factorial1}");
-Console.WriteLine($"Факториал числа 9 = {factorial9}");
-*/
